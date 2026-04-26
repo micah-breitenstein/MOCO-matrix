@@ -25,18 +25,20 @@ MOCO-Matrix drives an 8×8 addressable RGB LED matrix to display motion control 
 
 ### Build with Arduino CLI
 ```bash
-arduino-cli compile --fqbn esp32:esp32:esp32s3 .
+arduino-cli compile --fqbn esp32:esp32:esp32s3 ESP32_S3_Matrix_Status
 ```
 
 ### Flash with Arduino CLI
 ```bash
-arduino-cli upload -p /dev/cu.usbmodem1201 --fqbn esp32:esp32:esp32s3 .
+arduino-cli upload -v -p /dev/cu.usbmodem1301 --fqbn esp32:esp32:esp32s3 ESP32_S3_Matrix_Status
 ```
+
+Use your board's port in place of `/dev/cu.usbmodem1301`.
 
 ### Using Arduino IDE
 1. Open `ESP32_S3_Matrix_Status.ino`
 2. Select Board: ESP32-S3
-3. Select Port: `/dev/cu.usbmodem1201`
+3. Select Port: `/dev/cu.usbmodem1301`
 4. Click Upload
 
 ## Configuration
@@ -77,7 +79,8 @@ Receives status updates via serial (UART) from the Mega master controller:
 
 ```
 ESP32-S3-Matrix/
-├── ESP32_S3_Matrix_Status.ino    # Main sketch
+├── ESP32_S3_Matrix_Status/
+│   └── ESP32_S3_Matrix_Status.ino # Main sketch
 └── LICENSE                        # MIT License
 ```
 
