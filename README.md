@@ -49,14 +49,22 @@ Matrix pin and timing settings at the top of `ESP32_S3_Matrix_Status.ino`:
 
 ## Status Indicators
 
-The 8×8 grid displays various status patterns:
-- **Cyan**: Ready/idle
-- **Green**: Motion in progress
-- **Red**: Error/emergency stop
-- **Yellow**: Warning/attention needed
-- **Blue**: System initializing
+The 8×8 grid displays the current system state via color and animation:
 
-Specific patterns indicate which axes are active (pan, tilt, swing, lift, focus).
+| Color | State |
+|-------|-------|
+| Breathing white | Idle / ready |
+| Purple | Drone mode |
+| Yellow | Timelapse mode |
+| Teal | Bounce mode |
+| Orange | Settings open |
+| Pulsing blue | Returning to home position |
+| Flashing red | Error or emergency stop |
+
+**Flash cues** (brief):
+- Green flash → Home position set
+- White flash → Home return complete
+- Amber flash → Home position not set
 
 ## Communication
 
