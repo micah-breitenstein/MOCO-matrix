@@ -824,21 +824,14 @@ void setup() {
   Serial1.begin(UART_BAUD, SERIAL_8N1, UART_RX_PIN, UART_TX_PIN);
 
   prefs.begin(PREF_NS, false);
-  uint8_t savedBrightness = prefs.getUChar(PREF_KEY_BRIGHT, systemState.brightness);
-  if (savedBrightness <= 100U) {
-    systemState.brightness = savedBrightness;
-  } else {
-    systemState.brightness = 5;
-    prefs.putUChar(PREF_KEY_BRIGHT, systemState.brightness);
-  }
+  // Always boot at 5% regardless of previously saved values.
+  systemState.brightness = 5;
+  prefs.putUChar(PREF_KEY_BRIGHT, systemState.brightness);
 
   randomSeed(static_cast<uint32_t>(micros() ^ millis()));
 
   matrixStrip.begin();
-  matrixStrip.setBrightness(255);
-  matrixStrip.fill(matrixStrip.Color(255, 255, 255));
-  matrixStrip.show();
-  delay(600);
+  matrixStrip.setBrightness(scalePercentToBrightness(systemState.brightness));
   matrixStrip.clear();
   matrixStrip.show();
 
