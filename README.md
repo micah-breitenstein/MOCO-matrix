@@ -13,7 +13,7 @@ MOCO-Matrix drives an 8×8 addressable RGB LED matrix to display motion control 
 ## Hardware
 
 - **MCU**: ESP32-S3 with integrated WiFi/BLE
-- **Display**: Waveshare 8×8 RGB LED matrix (WS2812B)
+- **Display**: [Waveshare ESP32-S3 Matrix](https://www.amazon.com/Waveshare-ESP32-S3-Matrix-Development-QMI8658C-Bluetooth/dp/B0D3DPLFL8/) - 8×8 RGB LED matrix (WS2812B)
 - **Interface**: GPIO data line to addressable LED strip
 
 ## Build & Flash
