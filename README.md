@@ -1,10 +1,10 @@
-# MOCO-Matrix
+# MOCO-matrix
 
 Arduino firmware for the ESP32-S3 controlling a Waveshare 8×8 RGB LED matrix status display.
 
 ## Overview
 
-MOCO-Matrix drives an 8×8 addressable RGB LED matrix to display motion control system status:
+MOCO-matrix drives an 8×8 addressable RGB LED matrix to display motion control system status:
 - Camera motion state (pan, tilt, swing, lift, focus)
 - Emergency stop indicator
 - System operational status
@@ -78,7 +78,7 @@ Receives status updates via serial (UART) from the Mega master controller:
 ## Project Structure
 
 ```
-ESP32-S3-Matrix/
+MOCO-matrix/
 ├── ESP32_S3_Matrix_Status/
 │   └── ESP32_S3_Matrix_Status.ino # Main sketch
 └── LICENSE                        # MIT License
