@@ -58,7 +58,8 @@ enum class Mode : uint8_t {
   IDLE,
   DRONE,
   TIMELAPSE,
-  BOUNCE
+  BOUNCE,
+  FLOWLAPSE
 };
 
 enum class UiMode : uint8_t {
@@ -414,6 +415,9 @@ Mode parseModeFromPayload(const char* payload) {
   if (startsWith(payload, "DRONE")) {
     return Mode::DRONE;
   }
+  if (startsWith(payload, "FLOWLAPSE")) {
+    return Mode::FLOWLAPSE;
+  }
   if (startsWith(payload, "TIMELAPSE")) {
     return Mode::TIMELAPSE;
   }
@@ -490,6 +494,8 @@ void handleEvent(EventType type, const char* payload) {
       systemState.currentMode = parseModeFromPayload(payload);
       if (systemState.currentMode == Mode::DRONE) {
         Serial.println("Matrix mode: DRONE");
+      } else if (systemState.currentMode == Mode::FLOWLAPSE) {
+        Serial.println("Matrix mode: FLOWLAPSE");
       } else if (systemState.currentMode == Mode::TIMELAPSE) {
         Serial.println("Matrix mode: TIMELAPSE");
       } else if (systemState.currentMode == Mode::BOUNCE) {
@@ -799,6 +805,17 @@ void renderCurrentState(const SystemState& state) {
     case Mode::DRONE:
       fillMatrix(130, 20, 170);
       return;
+    case Mode::FLOWLAPSE: {
+      // Purple breathing effect
+      float breathePhase = static_cast<float>(now % IDLE_BREATHING_CYCLE_MS) / static_cast<float>(IDLE_BREATHING_CYCLE_MS);
+      float breatheWave = (sinf(breathePhase * 2.0f * PI) + 1.0f) * 0.5f;
+      uint8_t breatheLevel = static_cast<uint8_t>(80.0f + breatheWave * 175.0f);
+      uint8_t r = static_cast<uint8_t>((static_cast<uint16_t>(breatheLevel) * 120U) / 255U);
+      uint8_t g = static_cast<uint8_t>((static_cast<uint16_t>(breatheLevel) * 10U)  / 255U);
+      uint8_t b = breatheLevel;
+      fillMatrix(r, g, b);
+      return;
+    }
     case Mode::TIMELAPSE:
       fillMatrix(170, 120, 0);
       return;
